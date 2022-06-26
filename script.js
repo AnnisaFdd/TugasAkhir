@@ -7,7 +7,13 @@ let weather ={
             "&units=metric&appid=" +
             this.apiKey
         )
-        .then((Response) => Response.json())
+        .then((response) => {
+            if(!response.ok){
+                alert.apply("No weather found.");
+                throw new Error("No weather found.");
+            }
+            return response.json();
+        })
         .then((data) => this.displayWeather(data));
     },
     displayWeather: function(data){
